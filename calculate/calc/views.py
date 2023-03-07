@@ -11,7 +11,7 @@ def profile_list(request):
 
 
 def profile_add(request):
-    template = 'profile/add_profile.html'
+    template = 'profile/profile_change.html'
     if request.method == "POST":
         form = ProfileAddForm(request.POST, request.FILES)
         if form.is_valid():

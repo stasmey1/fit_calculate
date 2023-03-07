@@ -22,7 +22,7 @@
         <p>активность - {{profile.get_activity_display}}</p>
         <hr>
         <p>индекс массы тела - {{profile.body_mass_index}}</p>
-        <p>{{normal_weight}}</p>
+        <p>Рекомендуемый вес - от {{normal_weight.min_weight}} до {{normal_weight.max_weight}}</p>
         <p>Килокаллории :
             {% if normal_calories %}
             {{normal_calories}}
@@ -36,8 +36,13 @@
             {{normal_protein_fat_carbohydrate}}
             {% endif %}
             {% if deficit_protein_fat_carbohydrate %}
-            {{deficit_protein_fat_carbohydrate}}
-            {% endif %}
+        <ul>
+            <li>белки - {{deficit_protein_fat_carbohydrate.protein}}</li>
+            <li>жиры - {{deficit_protein_fat_carbohydrate.fat}}</li>
+            <li>углеводы - {{deficit_protein_fat_carbohydrate.carbohydrate}}</li>
+        </ul>
+
+        {% endif %}
         </p>
     </div>
 </div>

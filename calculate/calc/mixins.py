@@ -7,7 +7,11 @@ class ProfileCaloriesMixin:
         '''Рекомендуемый вес'''
         min_weight = int(18 * ((self.height / 100) ** 2))
         max_weight = int(25 * ((self.height / 100) ** 2))
-        return f'Минимальный вес - {min_weight}, максимальный вес - {max_weight}'
+        dict_normal_weight = {
+            'min_weight': min_weight,
+            'max_weight': max_weight
+        }
+        return dict_normal_weight
 
     def normal_calories(self):
         '''Норма каллорий'''
@@ -24,14 +28,21 @@ class ProfileCaloriesMixin:
         protein = int(1.8 * self.weight)
         fat = int(self.weight)
         carbohydrate = int((self.normal_calories() - 4 * protein - fat * 9) / 4)
-        return f'{protein}г. белка, {fat}г. жиров, {carbohydrate}г. углеводов'
+        dict_normal_protein_fat_carbohydrate = {
+            'protein': protein,
+            'fat': fat,
+            'carbohydrate': carbohydrate
+        }
+        return dict_normal_protein_fat_carbohydrate
 
     def deficit_protein_fat_carbohydrate(self):
         '''Норма БЖУ при похудении'''
         protein = int(2 * self.weight)
-        if self.body_mass_index() <= 25:
-            fat = self.weight
-        else:
-            fat = 0.9 * self.weight
+        fat = self.weight if self.body_mass_index() <= 25 else 0.9 * self.weight
         carbohydrate = int((self.deficit_calories() - 4 * protein - fat * 9) / 4)
-        return f'{protein}г. белка, {fat}г. жиров, {carbohydrate}г. углеводов'
+        dict_deficit_protein_fat_carbohydrate = {
+            'protein': protein,
+            'fat': fat,
+            'carbohydrate': carbohydrate
+        }
+        return dict_deficit_protein_fat_carbohydrate
